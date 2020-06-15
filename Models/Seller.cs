@@ -9,8 +9,8 @@ namespace SalesWebMvc.Models
         public int Id{ get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public DateTime birthDate { get; set; }
-        public double baseSalary { get; set; }
+        public DateTime BirthDate { get; set; }
+        public double BaseSalary { get; set; }
         public Departament Departament { get; set; } // ligacao do departamento pro saller 
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();//// de um para muitos do sales pro sallesrecord que que respresenta um vendedor 
         
@@ -24,8 +24,8 @@ namespace SalesWebMvc.Models
             Id = id;
             Name = name;
             Email = email;
-            this.birthDate = birthDate;
-            this.baseSalary = baseSalary;
+            this.BirthDate = birthDate;
+            this.BaseSalary = baseSalary;
             Departament = departament;
         }
    
