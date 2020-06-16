@@ -30,7 +30,7 @@ namespace SalesWebMvc.Controllers
         public IActionResult Create()
         {
             var departaments = _departamentService.FindAll(); //retorna todos os departamentos do banco
-            var viewModel = new SellerFormViewModel { Departaments = departaments}; /// colecao la do modelview 
+            var viewModel = new SellerFormViewModel { Departaments = departaments }; /// colecao la do modelview 
             return View(viewModel); // retorna a view com os departamentos populados
         }
 
@@ -41,5 +41,29 @@ namespace SalesWebMvc.Controllers
             _sellerService.Insert(seller);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int? id) ///o id pode ser vazio
+        {
+            if (id == null) ///id for vazio retorna notfound
+            {
+                return NotFound();
+            }
+            var obj = _sellerService.FindById(id.Value);///pesquisa o objeto com id.value pq ele pode ser null pq do ?
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+          _sellerService.Remove(id);
+          return RedirectToAction("Index");
+        }
+
     }
 }
