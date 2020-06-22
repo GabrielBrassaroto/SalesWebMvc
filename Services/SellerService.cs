@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
 
@@ -29,9 +29,9 @@ namespace SalesWebMvc.Services
             _context.SaveChanges();
         }
 
-        public Seller FindById(int id)
+        public Seller FindById(int id) ///o include do core para puxar nome do departamento tipo inner join sql
         {
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id);/// retorna o primeiro que o linq achar for igual ao do id
+            return _context.Seller.Include(obj => obj.Departament).FirstOrDefault(obj => obj.Id == id);/// retorna o primeiro que o linq achar for igual ao do id
         }
 
         public void Remove(int id)
